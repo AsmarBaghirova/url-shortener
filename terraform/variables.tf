@@ -3,7 +3,7 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  default = "westeurope"
+  default = "polandcentral"
 }
 
 variable "app_service_plan_name" {
