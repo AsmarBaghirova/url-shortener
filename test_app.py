@@ -9,11 +9,16 @@ def client():
         yield client
 
 def test_home_page_loads(client):
-    response = client.get("/")
-    assert response.status_code == 200
+    with patch("app.init_db"), patch("app.get_db") as mock_db:
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_db.return_value = mock_conn
+        mock_conn.cursor.return_value = mock_cur
+        response = client.get("/")
+        assert response.status_code == 200
 
 def test_redirect_not_found(client):
-    with patch("app.get_db") as mock_db:
+    with patch("app.init_db"), patch("app.get_db") as mock_db:
         mock_conn = MagicMock()
         mock_cur = MagicMock()
         mock_db.return_value = mock_conn
