@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 80px auto; padding: 0 20px; }
+        input[type=text] { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 10px; }
+        button { padding: 10px 20px; font-size: 16px; background: #4A90E2; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 5px; }
+        a { color: #4A90E2; }
+    </style>
+</head>
+<body>
+    <h1>🔗 URL Shortener</h1>
+    <p>Paste a long URL below and get a short one back.</p>
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="https://example.com/very/long/url" required>
+        <button type="submit">Shorten</button>
+    </form>
+
+    {% if short_url %}
+    <div class="result">
+        <strong>Your short URL:</strong><br>
+        <a href="{{ short_url }}">{{ short_url }}</a>
+    </div>
+    {% endif %}
+</body>
+</html>
