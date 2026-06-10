@@ -12,6 +12,10 @@ app = Flask(__name__)
 def get_db():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
 
+@app.before_request
+def setup():
+    init_db()
+
 def init_db():
     conn = get_db()
     cur = conn.cursor()
@@ -58,9 +62,4 @@ def redirect_url(code):
     return "URL not found", 404
 
 if __name__ == "__main__":
-    try:
-        init_db()
-        print("Database connected successfully!")
-        app.run(debug=True)
-    except Exception as e:
-        print(f"Error: {e}")
+    app.run(debug=True)
